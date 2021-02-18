@@ -2,24 +2,27 @@
 # To add a new markdown cell, type '# %% [markdown]'
 # %% [markdown]
 # # 1 - Notacion cientifica en la Computadora (5000 créditos)
-# - a) 4500000 con 4 caracteres: 45e5
-# - b) -1230000 con 6 caracteres: -123e4
-# - c) 0.000000123 con 6 caracteres: 123e-9
-# - d) 1 con 4 caracteres: 1e00
-#  
-# %% [markdown]
-# # 2 - No confies en los calculos de las computadoras (10000 créditos)
-# * a)
-#     - a) 0.4 * 6 > 0.24           True
-#     - b) 0.8 * 3 == 0.3 * 8       False
-#     - c) 0.3 * 3 == 0.9           False
-#     - d) 3.1 * 2 < 6.2            False
-#     - e) 1e100 + 1e50 == 1e100    True
-# 
-# * b)
-#     1e100 + 10**n > 1e100 para N = 84        
 
 # %%
+print(f'a) 4500000 con 4 caracteres: 45e5 == {45e5}')
+print(f'b) -1230000 con 6 caracteres: -123e4 == {-123e4}')
+print(f'c) 0.000000123 con 6 caracteres: 123e-9 == {123e-9}')
+print(f'd) 1 con 4 caracteres: 1e00 == {1e00}')
+
+# %% [markdown]
+# # 2 - No confies en los calculos de las computadoras (10000 créditos)
+
+# %%
+# a)
+print(f'a) 0.4 * 6 > 0.24 : {0.4 * 6 > 0.24}')
+print(f'b) 0.8 * 3 == 0.3 * 8 : {0.8 * 3 == 0.3 * 8}') 
+print(f'c) 0.3 * 3 == 0.9 : {0.3 * 3 == 0.9}')
+print(f'd) 3.1 * 2 < 6.2 : {3.1 * 2 < 6.2}')
+print(f'e) 1e100 + 1e50 == 1e100 : {1e100 + 1e50 == 1e100}')
+
+
+# %%
+## b) 1e100 + 10**n > 1e100  para N = 84   
 i = 1
 while not (1e100+10**i > 1e100):
     i+=1
@@ -36,6 +39,8 @@ i = 83.0
 while not (1e100+10**i > 1e100):
     i+=0.0000001
 print(i)
+
+# esto es un resultado aproximado, con incrementos menores el resultado debe ser mas preciso, pero aumenta el costo computacional
 
 # %% [markdown]
 # # 3 - Python! (10000 créditos)
@@ -101,6 +106,7 @@ while True:
         break
     last = current
 print(h)
+# esto es un resultado aproximado, con incrementos menores el resultado debe ser mas preciso, pero aumenta el costo computacional
 
 # %% [markdown]
 # # 5 - Primera introducción a la Serie da Taylor (20000 créditos)
@@ -324,6 +330,5 @@ print(weird_sum(list))
 # El dinosaurio, de Augusto Monterroso es considerado el relato mas corto escrito en espaǹol, o por lo menos lo fue hasta principios del siglo 21, cuando son publicadas 'El emigrante', 'Luis XIV' y 'Epitafio para un microrrelatista', pero bueno, ya estos vinieron a copiar al original asi que... no son tan relevantes ;-)
 # 
 # - pregunta secreta:
-#     la pregunta debe estar relacionada con que el profe dijo en la conferencia que debı́amos ignorarlo y ponernos a probar cosas en la pc, que ellos, como el dinosaurio... estarı́an ahı́... lo q no aclararon si ese ahı́ es en el curso próximo repitiendo la asigantura 
-# 
+#     la pregunta debe estar relacionada con que el profe dijo en la conferencia que debı́amos ignorarlo y ponernos a probar cosas en la pc, que ellos, como el dinosaurio... estarı́an ahı́... lo q no aclararon si ese ahı́ es en el curso próximo repitiendo la asigantura 🤔
 
