@@ -28,20 +28,28 @@ while not (1e100+10**i > 1e100):
     i+=1
 print(i)
 
-
-# %%
-# c)
-
-# tomando 0.0000001 como incremento...
-
-i = 83.0
-
-while not (1e100+10**i > 1e100):
-    i+=0.0000001
-print(i)
-
-# esto es un resultado aproximado, con incrementos menores el resultado debe ser mas preciso, pero aumenta el costo computacional
-
+# %% [markdown]
+# ### c) en este caso los float de c,c++ y c# son de 32 bits, lo que quiere decir que no seran suficientes para guardar un numero lo suficientemente grande como para que al sumarlo con 1e100, esta suma sea mayor q 1e100
+# #include<stdio.h>
+# #include<math.h>
+# 
+# int main()
+# {
+# 
+#     float n = 1.0;
+#     float i = 1.0;
+#     while(pow(n,i) + 1e100 == 1e100){
+#         i++;
+#         if(i > 100){
+#             printf("no se pudo encontrar el valor, se sale de los rangos de float");
+#             return 0;
+#         }
+#             
+#     }
+#     printf("%d", i);
+#         
+#     return 0;
+# }
 # %% [markdown]
 # # 3 - Python! (10000 créditos)
 
@@ -150,25 +158,26 @@ def taylor(function,  x_0, n):
 
 
 # %%
-def plot(n:int):
-    x_lims = [-10,10]
+def plot(func, n:int, x_0:float, a:float, b:float):
+    
+    y_0 = func.subs(x,x_0)
+    
+    plt.scatter(x_0,y_0, color='red', label=f'f({x_0})')
+    
+    x_lims = [a,b]
     x1 = np.linspace(x_lims[0], x_lims[1], 800)
     y1 = []
     y2 = []
     
-    for j in range(1,n+1):
-        if j == n or j % 2 == 0: 
-            func = taylor(f,0,j)
-            for k in x1:
-                y1.append(func.subs(x,k))
-            plt.plot(x1,y1,label=(f'Orden {str(j)}:'))
-            y1 = []
+    func = taylor(f,x_0,n)
     for k in x1:
+        y1.append(func.subs(x,k))
         y2.append(f.subs(x,k))
         
-    plt.plot(x1,y2,label='Funcion Original')
+    plt.plot(x1,y1,label=(f'Orden {str(n)}:'))        
+    plt.plot(x1,y2,label='Funcion Original',color='purple')
     plt.xlim(x_lims)
-    plt.ylim([-5,5])
+    plt.ylim([int(y_0)-5,5+int(y_0)])
     plt.xlabel('x')
     plt.ylabel('y')
     plt.legend()
@@ -181,65 +190,102 @@ def plot(n:int):
 e = sy.Symbol('e')
 x = sy.Symbol('x')
 f = e**x
-n = 10
+n = 3
 
 sy.pprint(f)
-func = taylor(f,0,n)
+func = taylor(f,5,n)
 print(f'Poliniomio de Taylor de orden {n}')
 sy.pprint(func)
 
 f = f.subs(e, math.e)
 
-plot(n)
+plot(f,n,5,-10,10)
 
 
 # %%
 x = sy.Symbol('x')
 f = sin(x)
-n = 10
+n = 2
 
 sy.pprint(f)
-func = taylor(f,0,n)
+func = taylor(f,5,n)
 print(f'Poliniomio de Taylor de orden {n}')
 sy.pprint(func)
 
-plot(n)
+plot(func, n, 5.6,-10,10)
 
 
 # %%
 x = sy.Symbol('x')
 f = x**5+6*x**3+4*x**2+5
-n = 10
+n = 1
 
 sy.pprint(f)
-func = taylor(f,0,n)
+func = taylor(f,7,n)
 print(f'Poliniomio de Taylor de orden {n}')
 sy.pprint(func)
 
-plot(n)
+plot(func,n,7,1,9)
 
 # %% [markdown]
 # # 7 - En esta asignatura el tamaño sı́ importa. (30000 créditos)
-# - Pregunta Secreta:
-#     $ O(h) $ y $ O(h^{2}) $ son los errores de resto o truncacion de cada una de las aproximaciones y su expresion exacta es:
-#     $$ $$
-#     
+# a)
+# - Usando (1) el error debe ser:
+#     - para f1, aproximadamente igual a h = 0.1
+#     - para f2 aproximadamente igual a $3xh + h^2 = 0.3 + 0.01 = 0.31$
+# - Usando (2) el error debe ser:
+#     - para f1 aproximadamente igual a 0
+#     - para f2 aproximadamente igual a $h^2 = 0.01$
+# %% [markdown]
+# b)
+# - Usando (1) el error es:
+#     - para f1, 0.1
+#     - para f2, 0.31
+# - Usando (2) el error es:
+#     - para f1, 0
+#     - para f2, 0.01
+
+# %%
+def deriv_1(func,x,h):
+    return (func(x+h)-func(x))/h
+
+def deriv_2(func,x,h):
+    return (func(x+h)-func(x-h))/(2*h)
+
+x2 = lambda x : x**2
+x3 = lambda x : x**3
+x2_der = lambda x : 2*x
+x3_der = lambda x : 3*x**2
+
+h = 0.1
+x = 1
+
+print('Usando derivada 1')
+print(abs(x2_der(x) - deriv_1(x2,x,h)))
+print(abs(x3_der(x) - deriv_1(x3,x,h)))
+
+
+print('Usando derivada 2')
+print(abs(x2_der(x) - deriv_2(x2,x,h)))
+print(abs(x3_der(x) - deriv_2(x3,x,h)))
+
 # %% [markdown]
 # # 8  Lo que tus profesores de Álgebra no querı́an que supieras(30000 créditos)
 
 # %%
 # a)
 def check_matrix_multiplication(m1,m2,m3):
-    return np.equal(m1@m2, m3).all()
-     
+    if np.dot(m1,m2).shape == m3.shape:
+        return np.equal(m1@m2, m3).all()
+    return False
 
 
 # %%
-m1 = np.array([[1,0,0], [0,1,0], [0,0,1]])
-m2 = np.array([[2,3,4], [1,2,3], [4,5,6]])
-m3 = np.array([[2,3,4], [1,2,3], [4,5,6]])
+A = np.array([[1,2],[3,4],[5,6]])
+B = np.array([[1,2,3],[4,5,6]])
+C = np.array([[7,10,13],[15,22,29]])
 
-check_matrix_multiplication(m1,m2,m3)
+check_matrix_multiplication(A,B,C)
 
 
 # %%
@@ -261,13 +307,75 @@ check_solution(A,x,b)
 
 # %% [markdown]
 # # 9 Cuando a la computadora no le gusta tu álgebra (30000 créditos)
+
+# %%
+# a)
+def generate_matrix(n):
+    mat = np.zeros((n,n))
+    
+    for i in range(n):
+        for j in range(n):
+            if i == j:
+                mat[i,j] = 0.5
+            elif i+1 == j:
+                mat[i,j] = 1
+    return mat
+
+
+# %%
+def solve(n):
+    return np.linalg.inv(generate_matrix(n))@np.ones(n)
+
+
+# %%
+# b)
+def check_solution_exact(n):
+    return check_solution(generate_matrix(n), solve(n), np.ones(n))
+
+check_solution_exact(25)
+
+
+# %%
+# c)
+values = [20,40,60,80,100]
+print([check_solution_exact(i) for i in values])
+
 # %% [markdown]
 # # 10 -  No hagas caso a los rumores (a no ser que sean ciertos :-/) (45000 créditos)
-# <b>a)</b>
-# %% [markdown]
-# <b>b)</b>
-# %% [markdown]
-# <b>c)</b>
+
+# %%
+# a)
+func = lambda x: x**2
+
+h30 = deriv_2(func,3,30)
+h01 = deriv_2(func,3,0.1)
+
+print(h30)
+print(h01)
+
+
+# %%
+# b)
+def identity(x):
+    for i in range(70):
+        x = math.sqrt(x)
+    for i in range(70):
+        x = x*x
+    return x
+
+print(identity(9))
+print(identity(0.1))
+print(identity(5.3))
+
+
+# %%
+list = [1e100, 1e83, 1e83, 1e83, 1e83, 1e83, 1e83, 1e83, 1e83, 1e83, 1e83]
+print(sum(list))
+
+
+list.reverse()
+print(sum(list))
+
 # %% [markdown]
 # # 11 - Cónicas (50000 créditos)
 # ### La función recibe una cónica tanto en su forma estndar como en su forma general escrita como una expresión válida en python, ambas 
@@ -300,7 +408,7 @@ plot_conic(x**2/2**2 - y**2/1**2)
 
 # %% [markdown]
 # # 12 - Este ejercicio es mucho más difı́cil de lo que parece. (80000 créditos)
-# Como 1e83 y 1e100 tienen una diferencia de exponentes tan grande (17), mas concretamente, un float de 64 bits de python tiene 16 digitos de precisión, por tanto, no es posible sumer los dos numeros sin que ocurran una cancelacion catastrófica, como vemos en los ejemplos debajo, si lo sumamos de manera normal no va a afectar la suma, si sumamos los 1e83 por separado, estos se convertiran en 1e84 que al sumarlo con 1e100 da un resultado distinto de 1e100 pero que sigue siendo incorrecto 
+# Como 1e83 y 1e100 tienen una diferencia de exponentes tan grande (17), mas concretamente, un float de 64 bits de python tiene 16 digitos de precisión, por tanto, no es posible sumar los dos números sin que ocurra una cancelación catastrófica, como vemos en los ejemplos debajo, si lo sumamos de manera normal no va a afectar la suma, si sumamos los 1e83 por separado, estos se convertiran en 1e84 que al sumarlo con 1e100 da un resultado distinto de 1e100 pero que sigue siendo incorrecto 
 
 # %%
 def weird_sum(list:list):
@@ -327,7 +435,7 @@ print(weird_sum(list))
 
 # %% [markdown]
 # # 13 -  ¿Dinosaurios? :-/ (30000 créditos)
-# El dinosaurio, de Augusto Monterroso es considerado el relato mas corto escrito en espaǹol, o por lo menos lo fue hasta principios del siglo 21, cuando son publicadas 'El emigrante', 'Luis XIV' y 'Epitafio para un microrrelatista', pero bueno, ya estos vinieron a copiar al original asi que... no son tan relevantes ;-)
+# El dinosaurio, de Augusto Monterroso es considerado el relato mas corto escrito en espaǹol, o por lo menos lo fue hasta principios del siglo 21, cuando son publicadas 'El emigrante', 'Luis XIV' y 'Epitafio para un microrrelatista', pero bueno, ya estos vinieron a copiar al original asi que... no es lo mismo ;-)
 # 
 # - pregunta secreta:
 #     la pregunta debe estar relacionada con que el profe dijo en la conferencia que debı́amos ignorarlo y ponernos a probar cosas en la pc, que ellos, como el dinosaurio... estarı́an ahı́... lo q no aclararon si ese ahı́ es en el curso próximo repitiendo la asigantura 🤔
