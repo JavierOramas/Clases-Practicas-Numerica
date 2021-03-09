@@ -1,4 +1,5 @@
-[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJavierOramas%2FClases-Practicas-Numerica&count_bg=%2367CF18&title_bg=%23555555&icon=jupyter.svg&icon_color=%23FF8400&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
+Your Badge Markdown:
+[![HitCount](http://hits.dwyl.com/JavierOramas/https://githubcom/JavierOramas/Clases-Practicas-Numerica/blob/master/readmemd.svg)](http://hits.dwyl.com/JavierOramas/https://githubcom/JavierOramas/Clases-Practicas-Numerica/blob/master/readmemd)
 # Clases Prácticas Matemática Numérica Curso 2021
 
 Este Repositorio contendrá las soluciones en .ipynb de las clases prácticas de matámatica numérica a medida que vayan siendo resueltas
