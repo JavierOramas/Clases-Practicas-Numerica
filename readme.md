@@ -1,3 +1,4 @@
+[![Hits](https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fgithub.com%2FJavierOramas%2FClases-Practicas-Numerica&count_bg=%2367CF18&title_bg=%23555555&icon=jupyter.svg&icon_color=%23FF8400&title=hits&edge_flat=false)](https://hits.seeyoufarm.com)
 # Clases Prácticas Matemática Numérica Curso 2021
 
 Este Repositorio contendrá las soluciones en .ipynb de las clases prácticas de matámatica numérica a medida que vayan siendo resueltas
