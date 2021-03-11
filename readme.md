@@ -1,3 +1,4 @@
+[![HitCount](http://hits.dwyl.com/JavierOramas/https://githubcom/JavierOramas/Clases-Practicas-Numerica/blob/master/readmemd.svg)](http://hits.dwyl.com/JavierOramas/https://githubcom/JavierOramas/Clases-Practicas-Numerica/blob/master/readmemd)
 # Clases Prácticas Matemática Numérica Curso 2021
 
 Este Repositorio contendrá las soluciones en .ipynb de las clases prácticas de matámatica numérica a medida que vayan siendo resueltas
